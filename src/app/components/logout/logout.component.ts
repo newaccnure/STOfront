@@ -13,7 +13,10 @@ export class LogoutComponent implements OnInit {
   ngOnInit() {
   }
 
-  show(): boolean{
-    return this.authservice.isAuthorized();
+  showLogout(): boolean{
+    return this.authservice.checkToken();
+  }
+  logOut(){
+    this.authservice.logOut();
   }
 }

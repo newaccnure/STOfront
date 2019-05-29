@@ -21,6 +21,5 @@ export class HomeComponent implements OnInit {
       }
     }
     this.router.navigate(['signup'], navigationExtras);
-    // console.log(role)
   }
 }

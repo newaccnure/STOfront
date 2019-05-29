@@ -1,0 +1,10 @@
+table {
+    width: 100%;
+}
+.container{
+    display: inline;
+    margin-left:5%;
+}
+.addTournament{
+    margin-top: 15px;
+}

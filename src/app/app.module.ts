@@ -19,6 +19,8 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { TournamentManageComponent } from './components/tournament-manage/tournament-manage.component';
+import { CreateTournamentMenuComponent } from './components/create-tournament-menu/create-tournament-menu.component';
+import { TournamentScheduleViewComponent } from './components/tournament-schedule-view/tournament-schedule-view.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { TournamentManageComponent } from './components/tournament-manage/tourna
     LayoutComponent,
     LogoutComponent,
     AboutUsComponent,
-    TournamentManageComponent
+    TournamentManageComponent,
+    CreateTournamentMenuComponent,
+    TournamentScheduleViewComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +51,7 @@ import { TournamentManageComponent } from './components/tournament-manage/tourna
   providers: [
     AuthService
   ],
+  entryComponents: [CreateTournamentMenuComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

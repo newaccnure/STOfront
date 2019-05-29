@@ -1,3 +1,161 @@
-<p>
-  tournament-manage works!
-</p>
+<div *ngIf="isAuthorized('organizer')">
+</div>
+
+<app-header></app-header>
+<div class ="container"> 
+  <h3>Your tournaments</h3>
+</div>
+<mat-tab-group>
+  <mat-tab label="Ongoing"> 
+      <table mat-table [dataSource]="ongoingTournaments" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let tournament"> {{tournament.name}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="participants">
+            <th mat-header-cell *matHeaderCellDef> Participants </th>
+            <td mat-cell *matCellDef="let tournament"> {{tournament.numberOfParticipants}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="eventFormat">
+            <th mat-header-cell *matHeaderCellDef> Event format </th>
+            <td mat-cell *matCellDef="let tournament"> {{tournament.eventFormat.name}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="sport">
+            <th mat-header-cell *matHeaderCellDef> Sport </th>
+            <td mat-cell *matCellDef="let tournament"> {{tournament.sport.name}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="firstDay">
+            <th mat-header-cell *matHeaderCellDef> First tournament day </th>
+            <td mat-cell *matCellDef="let tournament"> {{tournament.schedule.tournamentSchedule.start | date }} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="lastDay">
+            <th mat-header-cell *matHeaderCellDef> Last tournament day </th>
+            <td mat-cell *matCellDef="let tournament"> {{tournament.schedule.tournamentSchedule.end | date}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="view">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let row"> 
+              <button mat-icon-button (click)="goToTournamentScheduleView()">
+                <mat-icon >search</mat-icon>
+              </button> 
+              <button mat-icon-button>
+                  <mat-icon>delete</mat-icon>
+                </button> 
+            </td>
+          </ng-container>
+    
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+  </mat-tab>
+  <mat-tab label="Incoming">
+    <!-- <div *ngFor="let tournament of incomingTournaments">
+
+    </div> -->
+    <table mat-table [dataSource]="incomingTournaments" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let tournament"> {{tournament.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="participants">
+        <th mat-header-cell *matHeaderCellDef> Participants </th>
+        <td mat-cell *matCellDef="let tournament"> {{tournament.numberOfParticipants}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="eventFormat">
+        <th mat-header-cell *matHeaderCellDef> Event format </th>
+        <td mat-cell *matCellDef="let tournament"> {{tournament.eventFormat.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="sport">
+        <th mat-header-cell *matHeaderCellDef> Sport </th>
+        <td mat-cell *matCellDef="let tournament"> {{tournament.sport.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="firstDay">
+        <th mat-header-cell *matHeaderCellDef> First tournament day </th>
+        <td mat-cell *matCellDef="let tournament"> {{tournament.schedule.tournamentSchedule.start | date }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastDay">
+        <th mat-header-cell *matHeaderCellDef> Last tournament day </th>
+        <td mat-cell *matCellDef="let tournament"> {{tournament.schedule.tournamentSchedule.end | date}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="view">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let row"> 
+          <button mat-icon-button (click)="goToTournamentScheduleView()">
+            <mat-icon >search</mat-icon>
+          </button> 
+          <button mat-icon-button>
+              <mat-icon>delete</mat-icon>
+            </button> 
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-tab>
+  <mat-tab label="Finished"> 
+      <table mat-table [dataSource]="finishedTournaments" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let tournament"> {{tournament.name}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="participants">
+            <th mat-header-cell *matHeaderCellDef> Participants </th>
+            <td mat-cell *matCellDef="let tournament"> {{tournament.numberOfParticipants}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="eventFormat">
+            <th mat-header-cell *matHeaderCellDef> Event format </th>
+            <td mat-cell *matCellDef="let tournament"> {{tournament.eventFormat.name}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="sport">
+            <th mat-header-cell *matHeaderCellDef> Sport </th>
+            <td mat-cell *matCellDef="let tournament"> {{tournament.sport.name}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="firstDay">
+            <th mat-header-cell *matHeaderCellDef> First tournament day </th>
+            <td mat-cell *matCellDef="let tournament"> {{tournament.schedule.tournamentSchedule.start | date }} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="lastDay">
+            <th mat-header-cell *matHeaderCellDef> Last tournament day </th>
+            <td mat-cell *matCellDef="let tournament"> {{tournament.schedule.tournamentSchedule.end | date}} </td>
+          </ng-container>
+    
+          <ng-container matColumnDef="view">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let row"> 
+              <button mat-icon-button (click)="goToTournamentScheduleView()">
+                <mat-icon >search</mat-icon>
+              </button> 
+              <button mat-icon-button>
+                  <mat-icon>delete</mat-icon>
+                </button> 
+            </td>
+          </ng-container>
+    
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+  </mat-tab>
+</mat-tab-group>
+<button class="addTournament" mat-raised-button (click)="openCreateTournamentMenu()"><mat-icon>add</mat-icon>New tournament</button>
+<app-footer></app-footer>

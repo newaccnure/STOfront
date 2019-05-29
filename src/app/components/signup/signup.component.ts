@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -16,6 +16,7 @@ export class SignUpComponent implements OnInit {
   
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private authService: AuthService) {
     this.route.queryParams.subscribe(params => {
       this.role = params.role
@@ -28,13 +29,22 @@ export class SignUpComponent implements OnInit {
   signup() {
     this.authService.signup(this.email, this.password, this.confirmPassword, this.role, "info").subscribe(
       data => {
-        console.log(data)
+        this.authService.saveToken(data)
+        this.navigateToRoleHomePage()
       },
       error => console.log(error)
     )
   }
 
-  loginForm() {
-
+  navigateToRoleHomePage(){
+    if (this.role == "organizer"){
+      this.router.navigate(['tournament-manage']);
+    } else if (this.role == "participant"){
+      // this.router.navigate(['tournament-manage']);
+      console.log("nothing")
+    } else if (this.role == "representative"){
+      // this.router.navigate(['tournament-manage']);
+      console.log("nothing")
+    }
   }
 }
