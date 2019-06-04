@@ -41,11 +41,11 @@
     
           <ng-container matColumnDef="view">
             <th mat-header-cell *matHeaderCellDef> </th>
-            <td mat-cell *matCellDef="let row"> 
-              <button mat-icon-button (click)="goToTournamentScheduleView()">
+            <td mat-cell *matCellDef="let tournament"> 
+              <button mat-icon-button (click)="goToTournamentScheduleView(tournament.id, tournament.eventFormat)">
                 <mat-icon >search</mat-icon>
               </button> 
-              <button mat-icon-button>
+              <button mat-icon-button (click)="deleteTournament(tournament.id)">
                   <mat-icon>delete</mat-icon>
                 </button> 
             </td>
@@ -93,11 +93,11 @@
 
       <ng-container matColumnDef="view">
         <th mat-header-cell *matHeaderCellDef> </th>
-        <td mat-cell *matCellDef="let row"> 
-          <button mat-icon-button (click)="goToTournamentScheduleView()">
+        <td mat-cell *matCellDef="let tournament"> 
+          <button mat-icon-button (click)="goToTournamentScheduleView(tournament.id, tournament.eventFormat)">
             <mat-icon >search</mat-icon>
           </button> 
-          <button mat-icon-button>
+          <button mat-icon-button (click)="deleteTournament(tournament.id)">
               <mat-icon>delete</mat-icon>
             </button> 
         </td>
@@ -142,11 +142,11 @@
     
           <ng-container matColumnDef="view">
             <th mat-header-cell *matHeaderCellDef> </th>
-            <td mat-cell *matCellDef="let row"> 
-              <button mat-icon-button (click)="goToTournamentScheduleView()">
+            <td mat-cell *matCellDef="let tournament"> 
+              <button mat-icon-button (click)="goToTournamentScheduleView(tournament.id, tournament.eventFormat)">
                 <mat-icon >search</mat-icon>
               </button> 
-              <button mat-icon-button>
+              <button mat-icon-button (click)="deleteTournament(tournament.id)">
                   <mat-icon>delete</mat-icon>
                 </button> 
             </td>

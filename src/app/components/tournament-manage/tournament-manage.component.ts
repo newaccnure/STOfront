@@ -6,7 +6,8 @@ import { CreateTournamentMenuComponent } from '../create-tournament-menu/create-
 import { MatDialog } from '@angular/material';
 import { Schedule } from 'src/app/models/Schedule';
 import { DateRange } from 'src/app/models/DateRange';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
+import { EventFormat } from 'src/app/models/EventFormat';
 
 @Component({
   selector: 'app-tournament-manage',
@@ -43,22 +44,22 @@ export class TournamentManageComponent implements OnInit {
 
   getOngoingTournaments() {
     this.tournamentService.getOngoingTournaments().subscribe(data => {
-      console.log(data)
       this.ongoingTournaments = data
     })
   }
+
   getIncomingTournaments() {
     this.tournamentService.getIncomingTournaments().subscribe(data => {
-      console.log(data)
       this.incomingTournaments = data
     })
   }
+
   getFinishedTournaments() {
     this.tournamentService.getFinishedTournaments().subscribe(data => {
-      console.log(data)
       this.finishedTournaments = data
     })
   }
+
   openCreateTournamentMenu() {
     const dialogRef = this.dialog.open(CreateTournamentMenuComponent, {
       width: '450px',
@@ -68,7 +69,7 @@ export class TournamentManageComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result)
-      if (result != undefined){
+      if (result != undefined) {
         this.tournamentService.addTournament(result).subscribe(data => {
           console.log(data)
         })
@@ -76,13 +77,29 @@ export class TournamentManageComponent implements OnInit {
     });
   }
 
-  goToTournamentScheduleView() {
-    console.log("asdfg")
-    this.router.navigate(['tournament-schedule-view']);
+  goToTournamentScheduleView(id: number, format: EventFormat) {
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        tournament: id,
+        format: format.name
+      }
+    }
+    this.router.navigate(['tournament-schedule-view'], navigationExtras);
   }
 
-  test() {
-    console.log(123);
+  deleteTournament(tournamentId: number) {
+    this.tournamentService.deleteTournament(tournamentId).subscribe(result=>{
+      if (result){
+        this.incomingTournaments = this.incomingTournaments.filter(function(val, idx, arr){
+          return val.id != tournamentId
+        })
+        this.finishedTournaments = this.finishedTournaments.filter(function(val, idx, arr){
+          return val.id != tournamentId
+        })
+        this.ongoingTournaments = this.ongoingTournaments.filter(function(val, idx, arr){
+          return val.id != tournamentId
+        })
+      }
+    })
   }
-
 }

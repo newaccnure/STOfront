@@ -3,6 +3,12 @@
     <div class="navbar-nav">
       <a class="nav-item nav-link" routerLink="/home">Home</a>
       <a class="nav-item nav-link" routerLink="/about-us">About</a>
+      <div *ngIf="isAuthorized('organizer')">
+          <a class="nav-item nav-link" routerLink="/tournament-manage">Tournaments</a>
+      </div>
+      <div *ngIf="isAuthorized('organizer')">
+          <a class="nav-item nav-link" routerLink="/game-manage">Games</a>
+      </div>
     </div>
   </div>
   <app-logout></app-logout>

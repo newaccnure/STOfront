@@ -6,6 +6,7 @@ import { SignUpComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { TournamentManageComponent } from './components/tournament-manage/tournament-manage.component';
 import { TournamentScheduleViewComponent } from './components/tournament-schedule-view/tournament-schedule-view.component';
+import { GameManageComponent } from './components/game-manage/game-manage.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'signup', component: SignUpComponent },
   { path: 'login/:role', component: LoginComponent },
   { path: 'tournament-manage', component: TournamentManageComponent},
+  { path: 'game-manage', component: GameManageComponent},
   { path: 'tournament-schedule-view', component: TournamentScheduleViewComponent}
 ];
 

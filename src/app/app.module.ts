@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TournamentManageComponent } from './components/tournament-manage/tournament-manage.component';
 import { CreateTournamentMenuComponent } from './components/create-tournament-menu/create-tournament-menu.component';
 import { TournamentScheduleViewComponent } from './components/tournament-schedule-view/tournament-schedule-view.component';
+import { GameManageComponent } from './components/game-manage/game-manage.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { TournamentScheduleViewComponent } from './components/tournament-schedul
     AboutUsComponent,
     TournamentManageComponent,
     CreateTournamentMenuComponent,
-    TournamentScheduleViewComponent
+    TournamentScheduleViewComponent,
+    GameManageComponent
   ],
   imports: [
     BrowserModule,
