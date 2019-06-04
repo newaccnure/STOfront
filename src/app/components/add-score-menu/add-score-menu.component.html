@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>First add score of the game and choose winner</h1>
+<div mat-dialog-content>
+
+  <div class="sub-entry">
+    <p>{{gameInfo.firstParticipant.email}}</p>
+    <input class="scoreInput" matInput type="number" min="0" placeholder="Choose score" [(ngModel)]="this.gameInfo.score.firstParticipantScore">
+  </div>
+  <div class="sub-entry">
+    <p>{{gameInfo.secondParticipant.email}}</p>
+    <input class="scoreInput" matInput type="number" min="0" placeholder="Choose score" [(ngModel)]="this.gameInfo.score.secondParticipantScore">
+  </div>
+
+  <mat-form-field>
+    <mat-select placeholder="Choose winner" [(ngModel)]="this.gameInfo.winner">
+      <mat-option *ngFor="let participant of participants" [value]="participant">
+        {{participant.email}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="gameInfo" cdkFocusInitial>Ok</button>
+</div>

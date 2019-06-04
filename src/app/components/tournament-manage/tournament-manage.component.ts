@@ -3,7 +3,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { TournamentManageService } from 'src/app/services/tournament-manage.service';
 import { Tournament } from 'src/app/models/Tournament';
 import { CreateTournamentMenuComponent } from '../create-tournament-menu/create-tournament-menu.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { Schedule } from 'src/app/models/Schedule';
 import { DateRange } from 'src/app/models/DateRange';
 import { Router, NavigationExtras } from '@angular/router';
@@ -24,6 +24,7 @@ export class TournamentManageComponent implements OnInit {
   newTournament: Tournament
 
   constructor(
+    public snackBar: MatSnackBar,
     private authService: AuthService,
     private router: Router,
     private tournamentService: TournamentManageService,
@@ -68,12 +69,15 @@ export class TournamentManageComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
-      if (result != undefined) {
+      if (result != undefined && result.id != -1) {
         this.tournamentService.addTournament(result).subscribe(data => {
-          console.log(data)
+          if (data.id == 0) {
+            this.snackBar.open("Something is wrong with your data.", "", {
+              duration: 5000,
+            });
+          }
         })
-      }
+      } 
     });
   }
 
@@ -88,15 +92,15 @@ export class TournamentManageComponent implements OnInit {
   }
 
   deleteTournament(tournamentId: number) {
-    this.tournamentService.deleteTournament(tournamentId).subscribe(result=>{
-      if (result){
-        this.incomingTournaments = this.incomingTournaments.filter(function(val, idx, arr){
+    this.tournamentService.deleteTournament(tournamentId).subscribe(result => {
+      if (result) {
+        this.incomingTournaments = this.incomingTournaments.filter(function (val, idx, arr) {
           return val.id != tournamentId
         })
-        this.finishedTournaments = this.finishedTournaments.filter(function(val, idx, arr){
+        this.finishedTournaments = this.finishedTournaments.filter(function (val, idx, arr) {
           return val.id != tournamentId
         })
-        this.ongoingTournaments = this.ongoingTournaments.filter(function(val, idx, arr){
+        this.ongoingTournaments = this.ongoingTournaments.filter(function (val, idx, arr) {
           return val.id != tournamentId
         })
       }

@@ -1,4 +1,4 @@
 export class Score {
-    firstParticipantScore: number
-    secondParticipantScore: number
+    firstParticipantScore = 0
+    secondParticipantScore = 0
 }

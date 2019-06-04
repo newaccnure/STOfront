@@ -32,7 +32,7 @@ export class CreateTournamentMenuComponent implements OnInit {
   }
 
   onNoClick(): void {
-    this.tournament = null
+    this.tournament.id = -1
     this.dialogRef.close();
   }
 }
