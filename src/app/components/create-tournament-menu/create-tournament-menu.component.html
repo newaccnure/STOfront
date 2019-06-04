@@ -1,0 +1,57 @@
+<h1 mat-dialog-title>New tournament</h1>
+<div mat-dialog-content>
+
+  <div class="sub-entry">
+    <p>Tournament name</p>
+    <mat-form-field>
+      <input matInput [(ngModel)]="tournament.name">
+    </mat-form-field>
+
+    <p>Number of participants</p>
+    <mat-form-field>
+      <input matInput [(ngModel)]="tournament.numberOfParticipants">
+    </mat-form-field>
+    <p></p>
+
+    <mat-form-field>
+      <mat-select placeholder="Event format" [(ngModel)]="this.tournament.eventFormat">
+        <mat-option *ngFor="let eventFormat of eventFormats" [value]="eventFormat">{{eventFormat.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <p></p>
+    
+    <mat-form-field>
+      <mat-select placeholder="Sport" [(ngModel)]="this.tournament.sport">
+        <mat-option *ngFor="let sport of sports" [value]="sport">{{sport.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <input matInput type="number" placeholder="Longevity of the game(min)" [(ngModel)]="this.tournament.schedule.gameTime">
+    <input matInput type="number" placeholder="Longevity of the break(min)" [(ngModel)]="this.tournament.schedule.breakTime">
+  </div>
+
+  <div class="sub-entry">
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker1" placeholder="First game day" [(ngModel)]="this.tournament.schedule.tournamentSchedule.start">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker2" placeholder="Last game day" [(ngModel)]="this.tournament.schedule.tournamentSchedule.end">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+
+    <p>Start of game day</p>
+    <input matInput type="time" [(ngModel)]="this.tournament.schedule.gameDayStart"/>
+    <p>End of game day</p>
+    <input matInput type="time" [(ngModel)]="this.tournament.schedule.gameDayEnd"/>
+  </div>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="tournament" cdkFocusInitial>Ok</button>
+</div>
